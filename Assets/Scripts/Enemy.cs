@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float speed = 1.0f;
@@ -10,6 +11,7 @@ public class Enemy : MonoBehaviour
 
     private SplineContainer spline = null;
     private float splineLength = 0f;
+    private Rigidbody rb = null;
 
     private float timeAlive = 0f;
 
@@ -17,6 +19,11 @@ public class Enemy : MonoBehaviour
     private float tempFloat = 0f;
 
     // ---------- Unity messages
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     private void Start()
     {
@@ -30,7 +37,7 @@ public class Enemy : MonoBehaviour
         if (tempFloat > 1.0f)
             OnReachedEnd();
         else
-            transform.position = spline.EvaluatePosition(tempFloat);
+            rb.position = spline.EvaluatePosition(tempFloat);
     }
 
     // ---------- public methods
