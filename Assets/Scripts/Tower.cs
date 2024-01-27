@@ -12,8 +12,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private GameObject projectilePrefab = null;
     [SerializeField] private EnemySearcher searcher = null;
 
-    private bool alive = true;
-    private Transform currentTarget = null;
+    private bool working = true;
 
     // ---------- Unity messages
 
@@ -34,7 +33,7 @@ public class Tower : MonoBehaviour
 
     private IEnumerator BehaviourLoop()
     {
-        while (alive)
+        while (working)
         {
             yield return new WaitForSeconds(shootDelay);
 
@@ -46,9 +45,8 @@ public class Tower : MonoBehaviour
 
     private void CheckForTarget()
     {
-        if (searcher.TryEnemiesFound(out Enemy[] enemies))
+        if (searcher.GetEnemiesInRange(range, out Enemy[] enemies))
         {
-            Debug.Log("Enemy found. Shooting...", gameObject);
             Shoot(enemies[0]);
         }
     }

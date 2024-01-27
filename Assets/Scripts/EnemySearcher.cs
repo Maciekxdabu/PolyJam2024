@@ -5,27 +5,27 @@ using UnityEngine;
 public class EnemySearcher : MonoBehaviour
 {
     [Header("Do not change, for debug only:")]
-    [SerializeField] private List<Enemy> enemiesInRange = new List<Enemy>();
+    [SerializeField] private LayerMask enemyLayers = 0;
+    [SerializeField] private float capsuleCircleDistance = 5f;
 
     // ---------- Unity messages
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent<Enemy>(out Enemy enemy))
-            enemiesInRange.Add(enemy);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.TryGetComponent<Enemy>(out Enemy enemy))
-            enemiesInRange.Remove(enemy);
-    }
-
     // ---------- public methods
 
-    public bool TryEnemiesFound(out Enemy[] enemies)
+    public bool GetEnemiesInRange(float radius, out Enemy[] enemies)
     {
-        enemies = enemiesInRange.ToArray();
+        Collider[] hits = Physics.OverlapCapsule(transform.position + Vector3.up * capsuleCircleDistance,
+            transform.position - Vector3.up * capsuleCircleDistance,
+            radius,
+            enemyLayers);
+
+        List<Enemy> enemiesList = new List<Enemy>();
+        foreach (Collider hit in hits)
+        {
+            enemiesList.Add(hit.GetComponent<Enemy>());
+        }
+
+        enemies = enemiesList.ToArray();
         return enemies.Length > 0;
     }
 }

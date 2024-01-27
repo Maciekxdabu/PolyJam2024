@@ -41,8 +41,6 @@ public class BuildManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        //get the raycast point
-        RaycastHit hit;
         Ray ray = playerCamera.ScreenPointToRay(mousePos);
         float enter = 0.0f;
         if (plane.Raycast(ray, out enter))

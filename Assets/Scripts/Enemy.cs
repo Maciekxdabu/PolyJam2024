@@ -30,9 +30,9 @@ public class Enemy : MonoBehaviour
         timeAlive = 0f;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        timeAlive += Time.deltaTime;
+        timeAlive += Time.fixedDeltaTime;
         tempFloat = (speed * timeAlive) / splineLength;
         if (tempFloat > 1.0f)
             OnReachedEnd();
@@ -47,6 +47,11 @@ public class Enemy : MonoBehaviour
         spline = _spline;
         splineLength = spline.CalculateLength();
         gameObject.SetActive(true);
+    }
+
+    public void OnHit()
+    {
+        Destroy(gameObject);
     }
 
     // ---------- private methods

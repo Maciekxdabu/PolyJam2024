@@ -20,7 +20,7 @@ public class BuildPreview : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         collidingWith.Add(other);
         UpdateState(false);
@@ -33,17 +33,17 @@ public class BuildPreview : MonoBehaviour
         {
             UpdateState(true);
         }
-    }
+    }*/
 
-    /*private void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        
+        UpdateState(false);
     }
 
     private void FixedUpdate()
     {
-        
-    }*/
+        UpdateState(true);
+    }
 
     // ---------- public methods
 

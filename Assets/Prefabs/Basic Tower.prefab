@@ -176,6 +176,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesInRange: []
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  capsuleCircleDistance: 5
+  range: 10
 --- !u!1001 &8504202655631375064
 PrefabInstance:
   m_ObjectHideFlags: 0
