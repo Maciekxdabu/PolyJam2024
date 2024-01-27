@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BuildManager : MonoBehaviour
 {
     [SerializeField] private GameObject planeGO = null;
-    [SerializeField] private GameObject previewGO = null;
+    [SerializeField] private BuildPreview previewGO = null;
+    [SerializeField] private GameObject towerToPlace = null;
 
     private Camera playerCamera = null;
     Plane plane;
@@ -24,6 +26,7 @@ public class BuildManager : MonoBehaviour
         {
             mousePos = ctx.ReadValue<Vector2>();
         };
+        inputs.Building.PlaceBuilding.started += PlaceCurrentTower;
     }
 
     private void OnEnable()
@@ -36,7 +39,7 @@ public class BuildManager : MonoBehaviour
         inputs.Building.Disable();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         //get the raycast point
         RaycastHit hit;
@@ -44,7 +47,17 @@ public class BuildManager : MonoBehaviour
         float enter = 0.0f;
         if (plane.Raycast(ray, out enter))
         {
-            previewGO.transform.position = ray.GetPoint(enter);
+            previewGO.ChangePosition(ray.GetPoint(enter));
+        }
+    }
+
+    // ---------- private methods
+
+    private void PlaceCurrentTower(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started && previewGO.CanPlace())
+        {
+            Instantiate(towerToPlace, previewGO.transform.position, Quaternion.identity);
         }
     }
 }

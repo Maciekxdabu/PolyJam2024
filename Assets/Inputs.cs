@@ -35,6 +35,15 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PlaceBuilding"",
+                    ""type"": ""Button"",
+                    ""id"": ""b39eee4d-9a87-4d10-85d4-8d552417a2fb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +57,17 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""action"": ""MousePos"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf5b8178-5012-474a-9ef3-bd9ef667d190"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +77,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         // Building
         m_Building = asset.FindActionMap("Building", throwIfNotFound: true);
         m_Building_MousePos = m_Building.FindAction("MousePos", throwIfNotFound: true);
+        m_Building_PlaceBuilding = m_Building.FindAction("PlaceBuilding", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -119,11 +140,13 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Building;
     private List<IBuildingActions> m_BuildingActionsCallbackInterfaces = new List<IBuildingActions>();
     private readonly InputAction m_Building_MousePos;
+    private readonly InputAction m_Building_PlaceBuilding;
     public struct BuildingActions
     {
         private @Inputs m_Wrapper;
         public BuildingActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @MousePos => m_Wrapper.m_Building_MousePos;
+        public InputAction @PlaceBuilding => m_Wrapper.m_Building_PlaceBuilding;
         public InputActionMap Get() { return m_Wrapper.m_Building; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -136,6 +159,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @MousePos.started += instance.OnMousePos;
             @MousePos.performed += instance.OnMousePos;
             @MousePos.canceled += instance.OnMousePos;
+            @PlaceBuilding.started += instance.OnPlaceBuilding;
+            @PlaceBuilding.performed += instance.OnPlaceBuilding;
+            @PlaceBuilding.canceled += instance.OnPlaceBuilding;
         }
 
         private void UnregisterCallbacks(IBuildingActions instance)
@@ -143,6 +169,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @MousePos.started -= instance.OnMousePos;
             @MousePos.performed -= instance.OnMousePos;
             @MousePos.canceled -= instance.OnMousePos;
+            @PlaceBuilding.started -= instance.OnPlaceBuilding;
+            @PlaceBuilding.performed -= instance.OnPlaceBuilding;
+            @PlaceBuilding.canceled -= instance.OnPlaceBuilding;
         }
 
         public void RemoveCallbacks(IBuildingActions instance)
@@ -163,5 +192,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     public interface IBuildingActions
     {
         void OnMousePos(InputAction.CallbackContext context);
+        void OnPlaceBuilding(InputAction.CallbackContext context);
     }
 }
