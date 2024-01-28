@@ -37,7 +37,10 @@ public class Enemy : MonoBehaviour
         if (tempFloat > 1.0f)
             OnReachedEnd();
         else
+        {
             rb.position = spline.EvaluatePosition(tempFloat);
+            rb.rotation = Quaternion.LookRotation(spline.EvaluateTangent(tempFloat), spline.EvaluateUpVector(tempFloat));
+        }
     }
 
     // ---------- public methods
