@@ -623,6 +623,8 @@ MonoBehaviour:
   - audio: {fileID: 218297770}
     volume: 0
   source: {fileID: 218297775}
+  hitClip: {fileID: 8300000, guid: 50131d9c3ae1e624f8896423005109b0, type: 3}
+  dieClip: {fileID: 8300000, guid: 73cbf223bd944524a9fb79a6773a5dcb, type: 3}
 --- !u!82 &218297770
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1517,7 +1519,7 @@ Transform:
   m_GameObject: {fileID: 269991585}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.87, y: 4.02, z: -21.29}
+  m_LocalPosition: {x: -29.02, y: 4.02, z: 39.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1552,45 +1554,45 @@ MonoBehaviour:
   - m_EditModeType: 1
     m_Knots:
     - Position:
-        x: 0
-        y: 0
-        z: -2.1699982
+        x: -0.61999893
+        y: -0.01999998
+        z: 19.829998
       TangentIn:
         x: 0
         y: 0
-        z: -1
+        z: -3.1402552
       TangentOut:
         x: 0
         y: 0
-        z: 1
+        z: 3.1402552
       Rotation:
         value:
           x: 0
-          y: 0
+          y: 0.32525712
           z: 0
-          w: 1
+          w: 0.94562566
     - Position:
-        x: 0.78999996
+        x: 8.25
         y: 0
-        z: 20.75
+        z: -2.9900017
       TangentIn:
         x: 0
         y: 0
-        z: -23.764435
+        z: -9.452447
       TangentOut:
         x: 0
         y: 0
-        z: 23.764435
+        z: 6.7246246
       Rotation:
         value:
           x: 0
-          y: 0.65614355
+          y: 0.5526764
           z: 0
-          w: 0.75463605
+          w: 0.8333959
     - Position:
-        x: 0
+        x: 28.83
         y: 0
-        z: 41.050003
+        z: 34.519997
       TangentIn:
         x: 0
         y: 0
@@ -1608,7 +1610,7 @@ MonoBehaviour:
     m_MetaData:
     - Mode: 2
       Tension: 0.5
-    - Mode: 2
+    - Mode: 3
       Tension: 0.5
     - Mode: 2
       Tension: 0.5

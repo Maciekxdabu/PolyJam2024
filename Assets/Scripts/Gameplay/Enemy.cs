@@ -74,6 +74,7 @@ public class Enemy : MonoBehaviour
         hp -= amount;
         if (hp <= 0)//die
         {
+            AudioManager.Instance.PlayDie();
             PlayerData.Instance.GiveMoney(moneyDropped);
             Destroy(gameObject);
         }

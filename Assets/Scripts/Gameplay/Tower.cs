@@ -76,6 +76,7 @@ public class Tower : MonoBehaviour
 
     private void Shoot(Enemy enemy)
     {
+        AudioManager.Instance.PlayShoot();
         Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity).GetComponent<Projectile>().Initialize(enemy.transform, range);
     }
 }

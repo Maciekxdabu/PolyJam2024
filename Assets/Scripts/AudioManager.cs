@@ -18,6 +18,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource musicBase = null;
     [SerializeField] private Instrument[] instruments = null;
     [SerializeField] private AudioSource source = null;
+    [Space]
+    [SerializeField] private AudioClip hitClip = null;
+    [SerializeField] private AudioClip dieClip = null;
 
     // ---------- Unity messages
 
@@ -51,6 +54,16 @@ public class AudioManager : MonoBehaviour
 
         if (muteMusic)
             MuteMusic();
+    }
+
+    public void PlayShoot()
+    {
+        source.PlayOneShot(hitClip);
+    }
+
+    public void PlayDie()
+    {
+        source.PlayOneShot(dieClip);
     }
 
     // ---------- private methods
