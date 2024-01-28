@@ -7,11 +7,13 @@ public class HUD : MonoBehaviour
 {
     public static HUD Instance { get; private set; }
 
-    [Header("Player References")]
+    [Header("HUD References")]
     [SerializeField] private TMP_Text hpText = null;
     [SerializeField] private TMP_Text moneyText = null;
+    [SerializeField] private TMP_Text waveText = null;
     [Header("Other References")]
     [SerializeField] private Canvas gameOverCanvas = null;
+    [SerializeField] private EnemySpawner enemySpawner = null;
 
     // ---------- Unity messages
 
@@ -25,14 +27,16 @@ public class HUD : MonoBehaviour
 
     private void Start()
     {
-        PlayerData.Instance.onHUDvalueChanged += UpdatePlayerValues;
+        PlayerData.Instance.onHUDvalueChanged += UpdateHudValues;
+        enemySpawner.onHUDvalueChanged += UpdateHudValues;
 
-        UpdatePlayerValues();
+        UpdateHudValues();
     }
 
     private void OnDestroy()
     {
-        PlayerData.Instance.onHUDvalueChanged -= UpdatePlayerValues;
+        PlayerData.Instance.onHUDvalueChanged -= UpdateHudValues;
+        enemySpawner.onHUDvalueChanged -= UpdateHudValues;
     }
 
     // ---------- public methods
@@ -44,9 +48,10 @@ public class HUD : MonoBehaviour
 
     // ---------- updaters
 
-    private void UpdatePlayerValues()
+    private void UpdateHudValues()
     {
         hpText.text = PlayerData.Instance.hp.ToString();
         moneyText.text = PlayerData.Instance.money.ToString();
+        waveText.text = enemySpawner.GetCurrentWave() + "/" + enemySpawner.GetMaxWaves();
     }
 }

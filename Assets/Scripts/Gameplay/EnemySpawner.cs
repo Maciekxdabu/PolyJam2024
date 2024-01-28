@@ -15,9 +15,14 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] SplineContainer splineCon = null;
 
     private bool waveRunning = false;
+    private int currentWave = 0;
 
     private bool startNextWave = false;
     private int enemyBlocksRunning = 0;
+
+    //value change events
+    public delegate void Deg();
+    public Deg onHUDvalueChanged;
 
     // ---------- Unity messages
 
@@ -56,7 +61,19 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    public int GetCurrentWave()
+    {
+        return currentWave;
+    }
+
+    public int GetMaxWaves()
+    {
+        return levelData.waves.Length;
+    }
+
     // ---------- IEnumerators
+
+    #region IEnumerators
 
     private IEnumerator SpawnEnemyLoop()
     {
@@ -73,6 +90,9 @@ public class EnemySpawner : MonoBehaviour
         //spawn waves
         for (int i=0; i<levelData.waves.Length; i++)
         {
+            currentWave = i + 1;
+            if (onHUDvalueChanged != null)
+                onHUDvalueChanged();
             Debug.Log("Waiting for starting wave...", gameObject);
             //allow user to start the next wave
             yield return new WaitUntil(() => startNextWave);
@@ -115,6 +135,8 @@ public class EnemySpawner : MonoBehaviour
         }
         enemyBlocksRunning--;
     }
+
+    #endregion
 
     // ---------- private methods
 
