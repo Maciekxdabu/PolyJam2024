@@ -6,6 +6,7 @@ using UnityEngine.Splines;
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private int hp = 1;
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private int damage = 1;
     [SerializeField] private int moneyDropped = 1;
@@ -53,10 +54,14 @@ public class Enemy : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void OnHit()
+    public void OnHit(int amount)
     {
-        PlayerData.Instance.GiveMoney(moneyDropped);
-        Destroy(gameObject);
+        hp -= amount;
+        if (hp <= 0)//die
+        {
+            PlayerData.Instance.GiveMoney(moneyDropped);
+            Destroy(gameObject);
+        }
     }
 
     // ---------- private methods

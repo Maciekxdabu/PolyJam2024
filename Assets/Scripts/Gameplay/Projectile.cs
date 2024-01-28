@@ -6,6 +6,7 @@ using DG.Tweening;
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private int damage = 1;
     [SerializeField] private float speed = 1f;
     [SerializeField] private int piercing = 1;
 
@@ -27,7 +28,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
         {
-            enemy.OnHit();
+            enemy.OnHit(damage);
             piercing--;
             if (piercing <= 0)
                 Destroy(gameObject);

@@ -47,8 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4166bb4c4f7adeb41b73b6749da8037e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 1
   speed: 6
   damage: 1
+  moneyDropped: 1
 --- !u!54 &7172652210303913144
 Rigidbody:
   m_ObjectHideFlags: 0
