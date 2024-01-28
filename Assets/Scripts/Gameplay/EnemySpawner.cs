@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
+using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Wave data")]
+    [SerializeField] private LevelSO levelData = null;
     [SerializeField] private float spawnDelay = 1.0f;
 
     [Header("references")]
     [SerializeField] GameObject enemyPrefab = null;
     [SerializeField] SplineContainer splineCon = null;
 
-    [SerializeField] private bool waveRunning = true;
+    private bool waveRunning = false;
+    private int currentWave = 0;
+
+    private bool startNextWave = false;
+    private int enemyBlocksRunning = 0;
+
+    //value change events
+    public delegate void Deg();
+    public Deg onHUDvalueChanged;
 
     // ---------- Unity messages
 
@@ -37,10 +47,33 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnEnemyLoop());
+        //StartCoroutine(SpawnEnemyLoop());
+        StartCoroutine(DoLevel());
+    }
+
+    // ---------- public methods
+
+    public void StartNextWave_Button()
+    {
+        if (waveRunning == false)
+        {
+            startNextWave = true;
+        }
+    }
+
+    public int GetCurrentWave()
+    {
+        return currentWave;
+    }
+
+    public int GetMaxWaves()
+    {
+        return levelData.waves.Length;
     }
 
     // ---------- IEnumerators
+
+    #region IEnumerators
 
     private IEnumerator SpawnEnemyLoop()
     {
@@ -51,10 +84,69 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    // ---------- 
+    //one for given run
+    private IEnumerator DoLevel()
+    {
+        //spawn waves
+        for (int i=0; i<levelData.waves.Length; i++)
+        {
+            currentWave = i + 1;
+            if (onHUDvalueChanged != null)
+                onHUDvalueChanged();
+            Debug.Log("Waiting for starting wave...", gameObject);
+            //allow user to start the next wave
+            yield return new WaitUntil(() => startNextWave);
+            startNextWave = false;
+            Debug.Log("Starting Wave: " + (i + 1), gameObject);
+
+            waveRunning = true;
+            StartCoroutine(DoWave(levelData.waves[i]));
+            yield return new WaitWhile(() => waveRunning);
+        }
+    }
+
+    //one at a time
+    private IEnumerator DoWave(LevelSO.Wave waveData)
+    {
+        enemyBlocksRunning = 0;
+
+        //spawn Enemy blocks until they last
+        for (int i=0; i<waveData.enemies.Length; i++)
+        {
+            enemyBlocksRunning++;
+            StartCoroutine(DoEnemyBlock(waveData.enemies[i]));
+            yield return new WaitForSeconds(waveData.enemies[i].delayToNextBlock);
+        }
+
+        //check if wave ended
+        yield return new WaitWhile(() => enemyBlocksRunning > 0);
+
+        //end wave before finishing Coroutine
+        waveRunning = false;
+    }
+
+    private IEnumerator DoEnemyBlock(LevelSO.EnemyBlock block)
+    {
+        //spawn enemies until they last
+        for (int i=0; i<block.amount; i++)
+        {
+            SpawnEnemy(block.enemy);
+            yield return new WaitForSeconds(block.delay);
+        }
+        enemyBlocksRunning--;
+    }
+
+    #endregion
+
+    // ---------- private methods
 
     private void SpawnEnemy()
     {
         Instantiate(enemyPrefab, splineCon.EvaluatePosition(0f), Quaternion.identity).GetComponent<Enemy>().Initialize(splineCon);
+    }
+
+    private void SpawnEnemy(GameObject _enemyPrefab)
+    {
+        Instantiate(_enemyPrefab, splineCon.EvaluatePosition(0f), Quaternion.identity).GetComponent<Enemy>().Initialize(splineCon);
     }
 }
