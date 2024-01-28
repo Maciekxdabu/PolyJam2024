@@ -24,6 +24,8 @@ public class HUD : MonoBehaviour
     [SerializeField] private Canvas gameOverCanvas = null;
     [SerializeField] private TMP_Text gameOverText = null;
     [SerializeField] private EnemySpawner enemySpawner = null;
+    [SerializeField] private AudioClip wonClip = null;
+    [SerializeField] private AudioClip lostClip = null;
 
     // ---------- Unity messages
 
@@ -68,10 +70,12 @@ public class HUD : MonoBehaviour
         if (won)
         {
             gameOverText.text = "You Won!";
+            AudioManager.Instance.PlayClip(wonClip, true);
         }
         else
         {
             gameOverText.text = "You Lost!";
+            AudioManager.Instance.PlayClip(lostClip, true);
         }
     }
 

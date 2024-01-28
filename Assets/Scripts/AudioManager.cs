@@ -15,7 +15,9 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance { private set; get; }
 
     [SerializeField] private float increasePercentage = 0.334f;
+    [SerializeField] private AudioSource musicBase = null;
     [SerializeField] private Instrument[] instruments = null;
+    [SerializeField] private AudioSource source = null;
 
     // ---------- Unity messages
 
@@ -41,5 +43,25 @@ public class AudioManager : MonoBehaviour
 
         instruments[index].volume = Mathf.Clamp(instruments[index].volume + increasePercentage, 0f, 1f);
         instruments[index].audio.volume = instruments[index].volume;
+    }
+
+    public void PlayClip(AudioClip clip, bool muteMusic=false)
+    {
+        source.PlayOneShot(clip);
+
+        if (muteMusic)
+            MuteMusic();
+    }
+
+    // ---------- private methods
+
+    private void MuteMusic()
+    {
+        foreach (Instrument obj in instruments)
+        {
+            obj.audio.volume = 0f;
+        }
+
+        musicBase.volume = 0f;
     }
 }
