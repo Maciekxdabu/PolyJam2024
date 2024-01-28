@@ -6,6 +6,8 @@ using UnityEngine.Splines;
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
+    private static int enemiesAlive = 0;
+
     [SerializeField] private int hp = 1;
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private int damage = 1;
@@ -24,12 +26,18 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        enemiesAlive++;
         rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
         timeAlive = 0f;
+    }
+
+    private void OnDestroy()
+    {
+        enemiesAlive--;
     }
 
     private void FixedUpdate()
@@ -43,6 +51,13 @@ public class Enemy : MonoBehaviour
             rb.position = spline.EvaluatePosition(tempFloat);
             rb.rotation = Quaternion.LookRotation(spline.EvaluateTangent(tempFloat), spline.EvaluateUpVector(tempFloat));
         }
+    }
+
+    // ---------- public static methods
+
+    public static bool AllDead()
+    {
+        return enemiesAlive <= 0;
     }
 
     // ---------- public methods

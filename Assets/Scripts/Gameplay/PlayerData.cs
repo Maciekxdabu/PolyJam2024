@@ -69,6 +69,6 @@ public class PlayerData : MonoBehaviour
     private void OnDeath()
     {
         alive = false;
-        HUD.Instance.OnGameEnd();
+        HUD.Instance.OnGameEnd(false);
     }
 }

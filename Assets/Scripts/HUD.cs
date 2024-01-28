@@ -22,6 +22,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private TMP_Text tower4Cost = null;
     [Header("Other References")]
     [SerializeField] private Canvas gameOverCanvas = null;
+    [SerializeField] private TMP_Text gameOverText = null;
     [SerializeField] private EnemySpawner enemySpawner = null;
 
     // ---------- Unity messages
@@ -55,9 +56,23 @@ public class HUD : MonoBehaviour
 
     // ---------- public methods
 
-    public void OnGameEnd()
+    public void OnGameEnd(bool won)
     {
+        if (gameOverCanvas.gameObject.activeSelf == true)//game has already ended
+        {
+            return;
+        }
+
         gameOverCanvas.gameObject.SetActive(true);
+
+        if (won)
+        {
+            gameOverText.text = "You Won!";
+        }
+        else
+        {
+            gameOverText.text = "You Lost!";
+        }
     }
 
     // ---------- updaters

@@ -84,7 +84,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    //one for given run
+    //one for a given run
     private IEnumerator DoLevel()
     {
         //spawn waves
@@ -102,6 +102,10 @@ public class EnemySpawner : MonoBehaviour
             StartCoroutine(DoWave(levelData.waves[i]));
             yield return new WaitWhile(() => waveRunning);
         }
+
+        yield return new WaitUntil(() => Enemy.AllDead());
+
+        HUD.Instance.OnGameEnd(true);
     }
 
     //one at a time
