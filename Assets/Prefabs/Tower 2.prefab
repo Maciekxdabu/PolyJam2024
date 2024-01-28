@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootDelay: 1
   range: 10
-  cost: 6
+  cost: 7
   audioIndex: 1
   shootPoint: {fileID: 7587055669331272453}
   meshFilter: {fileID: 950989846943186524}

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4188f9da2c1ee64092b8485e738f1cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootDelay: 1
+  shootDelay: 0.5
   range: 10
   cost: 10
   audioIndex: 3

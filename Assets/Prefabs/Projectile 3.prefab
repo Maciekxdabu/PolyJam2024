@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a6ff5b4cfe450428ce6c6ebfbaa40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  piercing: 1
+  damage: 1
+  speed: 60
+  piercing: 2
 --- !u!54 &8119907157498415083
 Rigidbody:
   m_ObjectHideFlags: 0
