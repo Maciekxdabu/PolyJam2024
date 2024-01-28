@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootDelay: 1
   range: 10
+  cost: 4
   shootPoint: {fileID: 7587055669331272453}
   meshFilter: {fileID: 3796850959801032358}
   meshRend: {fileID: 1393275421790464620}

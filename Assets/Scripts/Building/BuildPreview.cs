@@ -12,6 +12,8 @@ public class BuildPreview : MonoBehaviour
     [SerializeField] private Material normalMaterial = null;
     [SerializeField] private Material invalidMaterial = null;
 
+    private int currentCost = 1000;
+
     private bool canPlace = true;
     private List<Collider> collidingWith = new List<Collider>();
     private Rigidbody rb = null;
@@ -60,33 +62,50 @@ public class BuildPreview : MonoBehaviour
         return canPlace;
     }
 
-    public void UpdateVisuals(Mesh mesh, int materialsAmount)
+    public void UpdateVisuals(Mesh mesh, int materialsAmount, int newCost)
     {
         meshFilter.mesh = mesh;
         meshCol.sharedMesh = mesh;
 
         Material[] materials = Enumerable.Repeat<Material>(normalMaterial, materialsAmount).ToArray();
         meshRend.materials = materials;
+
+        currentCost = newCost;
     }
 
     public void UpdateState(bool newState)
     {
+        if (PlayerData.Instance.CanSpent(currentCost) == false)
+        {
+            if (canPlace)
+            {
+                canPlace = false;
+                UpdateMaterial(invalidMaterial);
+            }
+            return;
+        }
+
         if (canPlace != newState)
         {
             canPlace = newState;
-            Material materialToPlace;
-            Material[] materials = meshRend.materials;
 
             if (canPlace)
-                materialToPlace = normalMaterial;
+                UpdateMaterial(normalMaterial);
             else
-                materialToPlace = invalidMaterial;
-
-            for (int i = 0; i < materials.Length; i++)
-            {
-                materials[i] = materialToPlace;
+                UpdateMaterial(invalidMaterial);
             }
-            meshRend.materials = materials;
+    }
+
+    // ---------- private methods
+
+    private void UpdateMaterial(Material newMaterial)
+    {
+        Material[] materials = meshRend.materials;
+
+        for (int i = 0; i < materials.Length; i++)
+        {
+            materials[i] = newMaterial;
         }
+        meshRend.materials = materials;
     }
 }

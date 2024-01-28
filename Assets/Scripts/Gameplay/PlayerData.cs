@@ -48,6 +48,22 @@ public class PlayerData : MonoBehaviour
         money += amount;
     }
 
+    public bool CanSpent(int amount)
+    {
+        return amount <= money;
+    }
+
+    public bool TryGetMoney(int amount)
+    {
+        if (amount <= money)
+        {
+            money -= amount;
+            return true;
+        }
+        else
+            return false;
+    }
+
     // ---------- private methods
 
     private void OnDeath()

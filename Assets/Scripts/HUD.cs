@@ -11,6 +11,15 @@ public class HUD : MonoBehaviour
     [SerializeField] private TMP_Text hpText = null;
     [SerializeField] private TMP_Text moneyText = null;
     [SerializeField] private TMP_Text waveText = null;
+    [Space]
+    [SerializeField] private Tower tower1 = null;
+    [SerializeField] private TMP_Text tower1Cost = null;
+    [SerializeField] private Tower tower2 = null;
+    [SerializeField] private TMP_Text tower2Cost = null;
+    [SerializeField] private Tower tower3 = null;
+    [SerializeField] private TMP_Text tower3Cost = null;
+    [SerializeField] private Tower tower4 = null;
+    [SerializeField] private TMP_Text tower4Cost = null;
     [Header("Other References")]
     [SerializeField] private Canvas gameOverCanvas = null;
     [SerializeField] private EnemySpawner enemySpawner = null;
@@ -29,6 +38,11 @@ public class HUD : MonoBehaviour
     {
         PlayerData.Instance.onHUDvalueChanged += UpdateHudValues;
         enemySpawner.onHUDvalueChanged += UpdateHudValues;
+
+        tower1Cost.text = tower1.GetCost().ToString();
+        tower2Cost.text = tower2.GetCost().ToString();
+        tower3Cost.text = tower3.GetCost().ToString();
+        tower4Cost.text = tower4.GetCost().ToString();
 
         UpdateHudValues();
     }

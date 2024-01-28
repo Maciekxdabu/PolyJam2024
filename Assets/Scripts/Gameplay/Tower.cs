@@ -6,6 +6,7 @@ public class Tower : MonoBehaviour
 {
     [SerializeField] private float shootDelay = 2.0f;
     [SerializeField] private float range = 2f;
+    [SerializeField] private int cost = 5;
     [Space]
     [SerializeField] private Transform shootPoint = null;
     [SerializeField] private MeshFilter meshFilter = null;
@@ -41,6 +42,11 @@ public class Tower : MonoBehaviour
     public int GetMaterialsAmount()
     {
         return meshRend.sharedMaterials.Length;
+    }
+
+    public int GetCost()
+    {
+        return cost;
     }
 
     // ---------- IEnumerators

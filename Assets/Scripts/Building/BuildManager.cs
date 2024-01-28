@@ -31,6 +31,12 @@ public class BuildManager : MonoBehaviour
         inputs.Building.PlaceBuilding.started += PlaceCurrentTower;
     }
 
+    private void Start()
+    {
+        Tower defaultTower = towerToPlace.GetComponent<Tower>();
+        previewGO.UpdateVisuals(defaultTower.GetMesh(), defaultTower.GetMaterialsAmount(), defaultTower.GetCost());
+    }
+
     private void OnEnable()
     {
         inputs.Building.Enable();
@@ -73,14 +79,14 @@ public class BuildManager : MonoBehaviour
     {
         towerToPlace = newBuilding;
         Tower tower = towerToPlace.GetComponent<Tower>();
-        previewGO.UpdateVisuals(tower.GetMesh(), tower.GetMaterialsAmount());
+        previewGO.UpdateVisuals(tower.GetMesh(), tower.GetMaterialsAmount(), tower.GetCost());
     }
 
     // ---------- private methods
 
     private void PlaceCurrentTower(InputAction.CallbackContext ctx)
     {
-        if (buildingEnabled && ctx.started && previewGO.CanPlace())
+        if (buildingEnabled && ctx.started && previewGO.CanPlace() && PlayerData.Instance.TryGetMoney(towerToPlace.GetComponent<Tower>().GetCost()))
         {
             Instantiate(towerToPlace, previewGO.transform.position, Quaternion.identity);
         }
