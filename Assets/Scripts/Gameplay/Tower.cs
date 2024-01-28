@@ -7,6 +7,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private float shootDelay = 2.0f;
     [SerializeField] private float range = 2f;
     [SerializeField] private int cost = 5;
+    [SerializeField] private int audioIndex = -1;
     [Space]
     [SerializeField] private Transform shootPoint = null;
     [SerializeField] private MeshFilter meshFilter = null;
@@ -21,6 +22,8 @@ public class Tower : MonoBehaviour
 
     void Start()
     {
+        AudioManager.Instance.IncreaseAudio(audioIndex);
+
         StartCoroutine(BehaviourLoop());
     }
 

@@ -49,6 +49,7 @@ MonoBehaviour:
   shootDelay: 1
   range: 10
   cost: 10
+  audioIndex: 3
   shootPoint: {fileID: 7587055669331272453}
   meshFilter: {fileID: 3073637812744032620}
   meshRend: {fileID: 955666952423073190}
