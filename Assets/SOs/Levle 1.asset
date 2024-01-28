@@ -30,7 +30,7 @@ MonoBehaviour:
         type: 3}
       amount: 10
       delay: 1
-      delayToNextBlock: 20
+      delayToNextBlock: 10
     - enemy: {fileID: 1701150773996345682, guid: 584469c8ba60a3d42845f92b02885cf7,
         type: 3}
       amount: 5

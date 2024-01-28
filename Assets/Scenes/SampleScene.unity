@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tower 2
+  m_text: Bongo
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 981e96d7aab3ab9499e3448622453ec5, type: 2}
   m_sharedMaterial: {fileID: -1268920825586672698, guid: 981e96d7aab3ab9499e3448622453ec5,
@@ -3375,7 +3375,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tower 1
+  m_text: Grzybojad
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 981e96d7aab3ab9499e3448622453ec5, type: 2}
   m_sharedMaterial: {fileID: -1268920825586672698, guid: 981e96d7aab3ab9499e3448622453ec5,
@@ -3510,7 +3510,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tower 3
+  m_text: Sepci0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 981e96d7aab3ab9499e3448622453ec5, type: 2}
   m_sharedMaterial: {fileID: -1268920825586672698, guid: 981e96d7aab3ab9499e3448622453ec5,
@@ -4054,7 +4054,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tower 4
+  m_text: Doma
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 981e96d7aab3ab9499e3448622453ec5, type: 2}
   m_sharedMaterial: {fileID: -1268920825586672698, guid: 981e96d7aab3ab9499e3448622453ec5,
@@ -4787,14 +4787,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286290919}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.38268343, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2089249968}
   m_Father: {fileID: 998533035}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
 --- !u!114 &1286290921
 MonoBehaviour:
   m_ObjectHideFlags: 0

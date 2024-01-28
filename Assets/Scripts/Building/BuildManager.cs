@@ -89,7 +89,7 @@ public class BuildManager : MonoBehaviour
         if (buildingEnabled && ctx.started && previewGO.CanPlace() && PlayerData.Instance.TryGetMoney(towerToPlace.GetComponent<Tower>().GetCost()))
         {
             AudioManager.Instance.PlayBuild();
-            Instantiate(towerToPlace, previewGO.transform.position, Quaternion.identity);
+            Instantiate(towerToPlace, previewGO.transform.position, previewGO.transform.rotation);
         }
     }
 }
