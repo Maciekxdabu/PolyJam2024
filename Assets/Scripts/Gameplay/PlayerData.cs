@@ -43,6 +43,11 @@ public class PlayerData : MonoBehaviour
             OnDeath();
     }
 
+    public void GiveMoney(int amount=1)
+    {
+        money += amount;
+    }
+
     // ---------- private methods
 
     private void OnDeath()

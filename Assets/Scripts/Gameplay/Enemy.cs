@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private int damage = 1;
+    [SerializeField] private int moneyDropped = 1;
 
     private SplineContainer spline = null;
     private float splineLength = 0f;
@@ -54,6 +55,7 @@ public class Enemy : MonoBehaviour
 
     public void OnHit()
     {
+        PlayerData.Instance.GiveMoney(moneyDropped);
         Destroy(gameObject);
     }
 
