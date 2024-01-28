@@ -52,7 +52,7 @@ MonoBehaviour:
   meshFilter: {fileID: 950989846943186524}
   meshRend: {fileID: 3086777137644817046}
   rangeTrigger: {fileID: 4162428286137887404}
-  projectilePrefab: {fileID: 6321950994276823777, guid: 3f56f8257a02a704caf97040176d7cbe,
+  projectilePrefab: {fileID: 6321950994276823777, guid: 94cdfff24ca7be646952e56d313bae12,
     type: 3}
   searcher: {fileID: 4226880422884342658}
 --- !u!1 &5469845199656191884
