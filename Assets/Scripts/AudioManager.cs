@@ -21,6 +21,8 @@ public class AudioManager : MonoBehaviour
     [Space]
     [SerializeField] private AudioClip hitClip = null;
     [SerializeField] private AudioClip dieClip = null;
+    [SerializeField] private AudioClip buildClip = null;
+    [SerializeField] private AudioClip uiClip = null;
 
     // ---------- Unity messages
 
@@ -64,6 +66,16 @@ public class AudioManager : MonoBehaviour
     public void PlayDie()
     {
         source.PlayOneShot(dieClip);
+    }
+
+    public void PlayBuild()
+    {
+        source.PlayOneShot(buildClip);
+    }
+
+    public void PlayUI()
+    {
+        source.PlayOneShot(uiClip);
     }
 
     // ---------- private methods
