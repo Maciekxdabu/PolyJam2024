@@ -69,6 +69,13 @@ public class BuildManager : MonoBehaviour
         previewGO.gameObject.SetActive(false);
     }
 
+    public void ChangeToNewBuilding(GameObject newBuilding)
+    {
+        towerToPlace = newBuilding;
+        Tower tower = towerToPlace.GetComponent<Tower>();
+        previewGO.UpdateVisuals(tower.GetMesh(), tower.GetMaterialsAmount());
+    }
+
     // ---------- private methods
 
     private void PlaceCurrentTower(InputAction.CallbackContext ctx)

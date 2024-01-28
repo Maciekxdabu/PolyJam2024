@@ -8,6 +8,8 @@ public class Tower : MonoBehaviour
     [SerializeField] private float range = 2f;
     [Space]
     [SerializeField] private Transform shootPoint = null;
+    [SerializeField] private MeshFilter meshFilter = null;
+    [SerializeField] private MeshRenderer meshRend = null;
     [SerializeField] private CapsuleCollider rangeTrigger = null;
     [SerializeField] private GameObject projectilePrefab = null;
     [SerializeField] private EnemySearcher searcher = null;
@@ -27,6 +29,18 @@ public class Tower : MonoBehaviour
         {
             rangeTrigger.radius = range;
         }
+    }
+
+    // ---------- public methods
+
+    public Mesh GetMesh()
+    {
+        return meshFilter.sharedMesh;
+    }
+
+    public int GetMaterialsAmount()
+    {
+        return meshRend.sharedMaterials.Length;
     }
 
     // ---------- IEnumerators

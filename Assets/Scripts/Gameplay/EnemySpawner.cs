@@ -93,11 +93,10 @@ public class EnemySpawner : MonoBehaviour
             currentWave = i + 1;
             if (onHUDvalueChanged != null)
                 onHUDvalueChanged();
-            Debug.Log("Waiting for starting wave...", gameObject);
+
             //allow user to start the next wave
             yield return new WaitUntil(() => startNextWave);
             startNextWave = false;
-            Debug.Log("Starting Wave: " + (i + 1), gameObject);
 
             waveRunning = true;
             StartCoroutine(DoWave(levelData.waves[i]));

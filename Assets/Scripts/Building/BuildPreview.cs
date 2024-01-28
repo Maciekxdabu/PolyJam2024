@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BuildPreview : MonoBehaviour
 {
     [SerializeField] private MeshRenderer meshRend = null;
+    [SerializeField] private MeshFilter meshFilter = null;
+    [SerializeField] private MeshCollider meshCol = null;
     [SerializeField] private Material normalMaterial = null;
     [SerializeField] private Material invalidMaterial = null;
 
@@ -35,10 +38,10 @@ public class BuildPreview : MonoBehaviour
         }
     }*/
 
-    private void OnTriggerStay(Collider other)
+    /*private void OnTriggerStay(Collider other)
     {
         UpdateState(false);
-    }
+    }*/
 
     private void FixedUpdate()
     {
@@ -57,9 +60,16 @@ public class BuildPreview : MonoBehaviour
         return canPlace;
     }
 
-    // ---------- private methods
+    public void UpdateVisuals(Mesh mesh, int materialsAmount)
+    {
+        meshFilter.mesh = mesh;
+        meshCol.sharedMesh = mesh;
 
-    private void UpdateState(bool newState)
+        Material[] materials = Enumerable.Repeat<Material>(normalMaterial, materialsAmount).ToArray();
+        meshRend.materials = materials;
+    }
+
+    public void UpdateState(bool newState)
     {
         if (canPlace != newState)
         {
