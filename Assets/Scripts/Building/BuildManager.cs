@@ -9,6 +9,8 @@ public class BuildManager : MonoBehaviour
     [SerializeField] private BuildPreview previewGO = null;
     [SerializeField] private GameObject towerToPlace = null;
 
+    private bool buildingEnabled = true;
+
     private Camera playerCamera = null;
     Plane plane;
 
@@ -49,11 +51,29 @@ public class BuildManager : MonoBehaviour
         }
     }
 
+    // ---------- public bool
+
+    public void EnableBuilding()
+    {
+        OnEnable();
+        previewGO.gameObject.SetActive(true);
+
+        buildingEnabled = true;
+    }
+
+    public void DisableBuilding()
+    {
+        buildingEnabled = false;
+
+        OnDisable();
+        previewGO.gameObject.SetActive(false);
+    }
+
     // ---------- private methods
 
     private void PlaceCurrentTower(InputAction.CallbackContext ctx)
     {
-        if (ctx.started && previewGO.CanPlace())
+        if (buildingEnabled && ctx.started && previewGO.CanPlace())
         {
             Instantiate(towerToPlace, previewGO.transform.position, Quaternion.identity);
         }

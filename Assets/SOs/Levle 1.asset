@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04aea7d45a09c7f4cb40f25ea15c67ca, type: 3}
+  m_Name: Levle 1
+  m_EditorClassIdentifier: 
+  waves:
+  - enemies:
+    - enemy: {fileID: 1701150773996345682, guid: 0948faed5023d3641b0c6a4514b36f8f,
+        type: 3}
+      amount: 5
+      delay: 1
+      delayToNextBlock: 0
+  - enemies:
+    - enemy: {fileID: 1701150773996345682, guid: 0948faed5023d3641b0c6a4514b36f8f,
+        type: 3}
+      amount: 5
+      delay: 1
+      delayToNextBlock: 0.5
+    - enemy: {fileID: 1701150773996345682, guid: 0948faed5023d3641b0c6a4514b36f8f,
+        type: 3}
+      amount: 10
+      delay: 0.5
+      delayToNextBlock: 0
